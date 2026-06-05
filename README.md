@@ -11,6 +11,14 @@
 
 ---
 
+## ⚠️ 合规边界
+
+本项目默认启用**低风险辅助模式**：本地辅助 · 只读优先 · 用户主动触发 · 不规避风控 · 不批量触达 · 不抓取平台数据。
+
+敏感操作（批量打招呼 `batch-greet`、投递、联系方式交换等）在低风险模式下返回 **`COMPLIANCE_BLOCKED`**，需回到 BOSS 直聘**官方页面**由用户手动完成。
+
+---
+
 ## 🎯 求职方向
 
 | 方向 | 目标 |
@@ -142,6 +150,33 @@ find-job/
 本项目的增量部分的代码和文档由 AI 辅助生成，人工审核后合并。
 
 ---
+
+## 📚 文档与参考
+
+本项目的完整文档来源于原项目，详见：
+
+| 文档 | 说明 |
+|------|------|
+| [快速开始](docs/getting-started.md) | 安装、登录、快速上手 |
+| [Agent 集成指南](docs/agent-quickstart.md) | 在 Claude/Cursor/Codex 中集成 |
+| [能力矩阵](docs/capability-matrix.md) | 各平台功能支持一览 |
+| [平台风险评估](docs/platform-risk.md) | Cookie / CDP / patchright 等认证链路说明 |
+
+### Browser Bridge 诊断
+
+Bridge 桥接层提供以下诊断项，通过 `boss doctor` 查看：
+
+| 诊断项 | 说明 |
+|--------|------|
+| `bridge_daemon` | Bridge 守护进程状态，通过 `python -m boss_agent_cli.bridge.daemon --serve` 启动 |
+| `bridge_extension` | Chrome Browser Bridge 扩展连接状态 |
+| `bridge_protocol` | 桥接协议版本兼容性 |
+| `bridge_workspace` | 工作区目录可写性 |
+| `bridge_exec` | 远程命令执行通道 |
+| `bridge_fetch` | 远程页面内容抓取通道 |
+| `bridge_navigate` | 远程页面导航通道 |
+
+> Bridge 不涉及风控绕过（risk-control bypass），仅用于复用浏览器登录态以降低 Cookie 提取的依赖。
 
 ## 📄 许可证
 
